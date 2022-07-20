@@ -1,0 +1,73 @@
+﻿@model IEnumerable<PaymentGateWayApp.Models.CountryClass>
+
+@{
+    ViewBag.Title = "getCountriesAndCurrencies";
+}
+<style>
+    table {
+        height: 10px;
+        overflow-y: scroll;
+    }
+
+    #countryCurrencyTable {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 70%;
+        height: 10px;
+        overflow-y: scroll;
+        margin-left: 100px;
+    }
+
+        #countryCurrencyTable td, #countryCurrencyTable th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #countryCurrencyTable tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #countryCurrencyTable tr:hover {
+            background-color: #ddd;
+        }
+
+        #countryCurrencyTable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            /*background-color: #04AA6D;*/
+            background-color: lightsteelblue;
+            color: white;
+        }
+</style>
+
+<table class="table" id="countryCurrencyTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TwoDigitCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThreeDIgitCode)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Currency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TwoDigitCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThreeDIgitCode)
+        </td>
+       
+    </tr>
+}
+
+</table>

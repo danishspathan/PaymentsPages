@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "getCurrencList";
+}
+
+<h2>getCurrencList</h2>
+
+<script> src="~/Scripts/jquery-3.4.1.slim.min.js"></script>
+<script>
+
+
+        $(window).on("load",function () {
+        var url =
+            "https://openexchangerates.org/api/currencies.json";
+
+        $.getJSON(url, function (data) {
+            $.each(data, function (index, value) {
+                /*console.log(value);*/
+
+                console.log(value);
+                //for (item in value) {
+
+                //    console.log(item);
+                //    //let name = value[item].country
+                //    //if (typeof name == 'undefined') {
+                //    //    continue;
+                //    //}
+
+                //    //else {
+                //    //    $("#locality-dropdown").append(
+                //    //        '<option value="' + name + '">' + name + "</option>"
+                //    //    );
+                //    //}
+                //}
+            });
+        });
+    });
+
+    //$(window).on("load", function () {
+    //    console.log("window loaded");
+    //});
+    //$("#reset").click(function () {
+    //    $(this).closest('form').find("input[type=text], textarea").val("");
+    //});
+</script>

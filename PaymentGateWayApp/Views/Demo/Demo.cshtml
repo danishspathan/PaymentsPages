@@ -1,0 +1,830 @@
+﻿
+@model  PaymentGateWayApp.Models.DemoModel
+@{ ViewBag.Title = "Datagenie"; }
+
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<style>
+    .modal-backdrop {
+        opacity: 0.5;
+    }
+
+    .modal-dialog {
+        max-width: 635px;
+        height: 90vh;
+    }
+
+    .modal {
+        height: 100vh;
+    }
+
+    .modal-content {
+        height: 90vh;
+    }
+
+    .modal-body {
+        height: 100%;
+    }
+
+    .modal-header .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+    }
+
+
+    /*.post-module {
+        position: relative;
+        z-index: 1;
+        display: block;
+        background: #FFFFFF;
+        min-width: 270px;
+        height: 470px;
+        -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+        -webkit-transition: all 0.3s linear 0s;
+        -moz-transition: all 0.3s linear 0s;
+        -ms-transition: all 0.3s linear 0s;
+        -o-transition: all 0.3s linear 0s;
+        transition: all 0.3s linear 0s;
+    }*/
+
+       /* .post-module:hover,
+        .hover {
+            -webkit-box-shadow: 0px 1px 35px 0px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0px 1px 35px 0px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 1px 35px 0px rgba(0, 0, 0, 0.3);
+        }
+
+            .post-module:hover .thumbnail img,
+            .hover .thumbnail img {
+                -webkit-transform: scale(1.1);
+                -moz-transform: scale(1.1);
+                transform: scale(1.1);
+                opacity: 0.6;
+            }
+
+        .post-module .thumbnail {
+            background: #000000;
+            height: 400px;
+            overflow: hidden;
+        }
+
+            .post-module .thumbnail .date {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                z-index: 1;
+                background: #e74c3c;
+                width: 55px;
+                height: 55px;
+                padding: 12.5px 0;
+                -webkit-border-radius: 100%;
+                -moz-border-radius: 100%;
+                border-radius: 100%;
+                color: #FFFFFF;
+                font-weight: 700;
+                text-align: center;
+                -webkti-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+                .post-module .thumbnail .date .day {
+                    font-size: 18px;
+                }
+
+                .post-module .thumbnail .date .month {
+                    font-size: 12px;
+                    text-transform: uppercase;
+                }
+
+            .post-module .thumbnail img {
+                display: block;
+                width: 120%;
+                -webkit-transition: all 0.3s linear 0s;
+                -moz-transition: all 0.3s linear 0s;
+                -ms-transition: all 0.3s linear 0s;
+                -o-transition: all 0.3s linear 0s;
+                transition: all 0.3s linear 0s;
+            }
+
+        .post-module .post-content {
+            position: absolute;
+            bottom: 0;
+            background: #FFFFFF;
+            width: 100%;
+            padding: 30px;
+            -webkti-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
+            -moz-transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
+            -ms-transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
+            -o-transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
+            transition: all 0.3s cubic-bezier(0.37, 0.75, 0.61, 1.05) 0s;
+        }
+
+            .post-module .post-content .category {
+                position: absolute;
+                top: -34px;
+                left: 0;
+                background: #e74c3c;
+                padding: 10px 15px;
+                color: #FFFFFF;
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .post-module .post-content .title {
+                margin: 0;
+                padding: 0 0 10px;
+                color: #333333;
+                font-size: 26px;
+                font-weight: 700;
+            }
+
+            .post-module .post-content .sub_title {
+                margin: 0;
+                padding: 0 0 20px;
+                color: #e74c3c;
+                font-size: 20px;
+                font-weight: 400;
+            }
+
+            .post-module .post-content .description {
+                display: none;
+                color: #666666;
+                font-size: 14px;
+                line-height: 1.8em;
+            }
+
+            .post-module .post-content .post-meta {
+                margin: 30px 0 0;
+                color: #999999;
+            }
+
+                .post-module .post-content .post-meta .timestamp {
+                    margin: 0 16px 0 0;
+                }
+
+                .post-module .post-content .post-meta a {
+                    color: #999999;
+                    text-decoration: none;
+                }
+
+    .hover .post-content .description {
+        display: block !important;
+        height: auto !important;
+        opacity: 1 !important;
+    }
+
+    .container {
+        max-width: 800px;
+        min-width: 640px;
+        margin: 0 auto;
+    }
+
+        .container:before,
+        .container:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .container .column {
+            width: 50%;
+            padding: 0 25px;
+            -webkti-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            float: left;
+        }
+
+            .container .column .demo-title {
+                margin: 0 0 15px;
+                color: #666666;
+                font-size: 18px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+        .container .info {
+            width: 300px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+            .container .info h1 {
+                margin: 0 0 15px;
+                padding: 0;
+                font-size: 24px;
+                font-weight: bold;
+                color: #333333;
+            }
+
+            .container .info span {
+                color: #666666;
+                font-size: 12px;
+            }
+
+                .container .info span a {
+                    color: #000000;
+                    text-decoration: none;
+                }
+
+                .container .info span .fa {
+                    color: #e74c3c;
+                }*/
+</style>
+<script>
+    $(document).ready(function () {
+
+      
+
+
+        var selectedPlanGlobal = $("#plan option:selected").text();
+    
+        setPlanDetails(selectedPlanGlobal);
+        var selectPlanVlaue = $("#plan option:selected").val();
+        if (selectPlanVlaue.includes('Y')) {
+            $("#Annual").prop("checked", true);
+        }
+        else {
+            $("#Monthly").prop("checked", true);
+        }
+        
+        var selectedPlanRight = $("#plan option:selected").val();
+        setRightPlanDetails(selectedPlanRight);
+        var countryName = null;
+
+        //$.ajax({
+        //    url: "https://countriesnow.space/api/v0.1/countries/currency",
+        //    method: "GET",
+        //    dataType: 'json',
+        //    success: function (data) {
+        //        console.log(data);
+        //        var html_to_append = '';
+        //        $.each(data, function (i, item) {
+        //            html_to_append +=
+        //                '<div class="col-3 mb-3"><div class="text-uppercase"><p>' +
+        //                item.Name +
+        //                '<div class="col-3 mb-3"><div class="ext-uppercase"><p>' +
+        //                item.Price +
+        //                '</p></div><img  class="image img-fluid" src="' +
+        //                item.photo +
+        //                '" /><p class="company">' +
+        //                item.Retailer +
+        //                '</p></div>';
+        //        });
+        //        $("#items-container").html(html_to_append);
+        //    },
+        //    error: function () {
+        //        console.log(data);
+        //    }
+        //});
+       /* alert($("#hiddenCountry").val());*/
+       
+
+        var hiddenncountry = $("#hiddenCountry").val();
+        if (hiddenncountry != "") {
+            var $select = $('#Country');
+            $select.children().filter(function () {
+                /*   alert(this.text);*/
+                return this.text == hiddenncountry;
+            }).prop('selected', true);
+        }
+        else {
+
+
+            $.ajax({
+                url: "https://ipapi.co/json/",
+                /* url: "https://ipapi.co/103.90.200.8/country/",*/
+                success: function (data) {
+                    //$("#Country option:selected").text(data.country_name);
+
+                    //$("#Country option:selected").value(data.country_name);
+                    //$('#Country').val(data.country_name);
+                    //$('#Country').text(data.country_name);
+                    //$("#txtCountry").attr("readonly", true);
+                    //$("#txtCountry").css("color", "cornflowerblue");
+                    countryName = data.country_name;
+                    var $select = $('#Country');
+                    //alert($select);
+                    //var test = $select.children().val();
+                    //alert(test);
+                    $select.children().filter(function () {
+                        /*   alert(this.text);*/
+                        return this.text == countryName;
+                    }).prop('selected', true);
+                    $("#hiddenCountry").val(countryName);
+                },
+                error: function () {
+                    alert("There was an error.");
+                }
+            });
+        }
+        $("#Country").change(function () {
+           
+            var selectedCountry = $("#Country option:selected").text();
+            console.log(selectedCountry);
+            console.log(countryName);
+            if (selectedCountry != countryName) {
+                alert('Selected country name and current country name do not match')
+            }
+            $("#hiddenCountry").val(selectedCountry);
+        });
+        $("#plan").change(function () {
+
+            var selectedPlan = $("#plan option:selected").text();
+            var selectedPlanRight = $("#plan option:selected").val();
+
+            setPlanDetails(selectedPlan);
+            setRightPlanDetails(selectedPlanRight);
+
+        });
+        $("#Annual").change(function () {
+          
+            var selectedPlanRightSmall = $("#plan option:selected").val();
+            setRightPlanDetails(selectedPlanRightSmall);
+        });
+        $("#Monthly").change(function () {
+       
+            var selectedPlanRightSmall = $("#plan option:selected").val();
+            setRightPlanDetails(selectedPlanRightSmall);
+        });
+
+        function setPlanDetails(selectedPlan) {
+            switch (selectedPlan) {
+                case "Enterprise":
+                    $("#planDetailsMonthly").text("$299 per month. 3000 Contacts per month. Additional credits $0.10");
+                    $("#planDetailsYearly").text("$2510.36000 Contacts per annum. Additional credits $0.10");
+                    $('#planTitle').text("Enterprise");
+                    $('#planText').text("3000 Contacts per month. Additional credits $0.13");
+
+                    break;
+                case "Corporate":
+                    $("#planDetailsMonthly").text("$199 per month. 1500 Contacts per month. Additional credits $0.13");
+                    $("#planDetailsYearly").text("$1670 perr annum. 18000 Contacts per month. Additional credits $0.13");
+                   
+                    $('#planTitle').text("Corporate");
+                    $('#planText').text("1500 Contacts per month. Additional credits $0.13");
+                    break;
+                case "Professional":
+                    $("#planDetailsMonthly").text("$99 per month. 500 Contacts per month. Additional credits $0.20");
+                    $("#planDetailsYearly").text("$830 per annum. 6000 Contacts per annum. Additional credits $0.20")
+             
+                    $('#planTitle').text("Professional");
+                    $('#planText').text("500 Contacts per month. Additional credits $0.20");
+                    break;
+             
+                default:
+
+                    $("#planDetailsMonthly").text("500 Contacts per month. Additional credits $0.20");
+                    $("#planDetailsYearly").text("6000 Contacts per annum. Additional credits $0.20")
+                    $('#planText').text("3000 Contacts per month Additional credits $0.10");
+
+                    break;
+            }
+        }
+        function setRightPlanDetails(selectedPlan) {
+            var switchonPlan = selectedPlan.toString();
+
+            
+            if ($("#Monthly").prop("checked") == true) {
+               
+                switchonPlan = switchonPlan.replace("Y", "");
+            }
+            else {
+                
+               switchonPlan =  switchonPlan.replace("Y", "")+"Y";
+            }
+      
+            switch (switchonPlan) {
+                
+                case "Enterprise":
+                    $("#titlePlan").text("Enterprise");
+                    $("#rightPrice").text("$299 Monthly");
+                    $("#rate").text("Monthly");
+                    $("#rateDiv").text("3000 contatcs per month");
+                    $("#additionalCredits").text("$0.10");
+                    $("#contactNo").text("3000");
+                    
+                    break;
+                case "Corporate":
+                    $("#titlePlan").text("Corporate");
+                    $("#rightPrice").text("$199 Monthly");
+                    $("#rate").text("Monthly");
+                    $("#rateDiv").text("1500 contacts per month");
+                    $("#additionalCredits").text("$0.13");
+                    $("#contactNo").text("1500");
+                 
+
+                 
+                    break;
+                case "Professional":
+                    $("#titlePlan").text("Professional");
+                    $("#rightPrice").text("$99 Monthly");
+                    $("#rate").text("Monthly");
+                    $("#rateDiv").text("500 contacts per month");
+                    $("#additionalCredits").text("$0.20");
+                    $("#contactNo").text("500");
+              
+
+               
+                    break;
+                case "EnterpriseY":
+                    $("#titlePlan").text("Enterprise");
+                    $("#rightPrice").text("$2510 annualy");
+                    $("#rate").text("annualy");
+                    $("#rateDiv").text("36000 contatcs per annum");
+                    $("#additionalCredits").text("$0.10"); 
+                    $("#contactNo").text("36000");
+                   
+
+                    break;
+
+                case "CorporateY":
+                    $("#titlePlan").text("Corporate");
+                    $("#rightPrice").text("$1670 annualy");
+                    $("#rate").text("annualy");
+                    $("#rateDiv").text("18000 contacts per annum");
+                    $("#additionalCredits").text("$0.13");
+                    $("#contactNo").text("18000");
+
+                
+                    break;
+                case "ProfessionalY":
+                    $("#titlePlan").text("Professional");
+                    $("#rightPrice").text("$830 annualy");
+                    $("#rate").text("annualy");
+                    $("#rateDiv").text("6000 contacts per annum");
+                    $("#additionalCredits").text("$0.20")
+                    $("#contactNo").text("6000");
+                   
+                    break;
+
+                default:
+
+                    $("#titlePlan").text("Professional");
+                    $("#rightPrice").text("$99 Monthly");
+                    $("#rate").text("Monthly");
+                    $("#rateDiv").text("500 contacts per month");
+                    $("#additionalCredits").text("$0.20");
+                    $("#contactNo").text("500");
+
+
+                    break;
+            }
+        }
+        //var url =
+        //    "https://countriesnow.space/api/v0.1/countries";
+
+        //$.getJSON(url, function (data) {
+        //    $.each(data, function (index, value) {
+        //        /*console.log(value);*/
+        //        for (item in value) {
+
+
+        //            let name = value[item].country
+        //            if (typeof name == 'undefined') {
+        //                continue;
+        //            }
+
+        //            else {
+        //                $("#locality-dropdown").append(
+        //                    '<option value="' + name + '">' + name + "</option>"
+        //                );
+        //            }
+        //        }
+        //    });
+        //});
+
+    });
+
+
+    //$("#reset").click(function () {
+    //    console.log("Entered");
+    //    $(this).closest('form').find("input[type=text], textarea").val("");
+    //});
+
+
+
+</script>
+
+<header class="plan-page">
+    <h1>Datagenie</h1>
+  
+</header>
+
+
+@using (Html.BeginForm())
+{
+   
+        @Html.HiddenFor(m=>m.hiddenCountry, @ViewBag.Country as string);
+ 
+        <div class="row align-items-center justify-content-center flex-column plan-page">
+
+        <div class="col-md-12 col-lg-10 loginScreen d-flex">
+            <div class="login-box register-box bg-white box-shadow border-radius-20">
+                <div class="login-title">
+                    <h2>Choose a Plan</h2>
+                </div>
+                @*<div class="rowpb -10">*@
+                <div class="input-group custom flex-column">
+                    @Html.Label("Plan")
+                    @Html.DropDownListFor(model => model.Plans, new SelectList(Model.selectPlan, "Value", "Text"), htmlAttributes: new { @class = "form-control", @id = "plan" })
+                    @Html.ValidationMessageFor(x => x.Plans, "", new { @class = "text-danger" })
+                    <div class="d-flex flex-row justify-content-between width-100 price-box">
+                        <div class="-p-2 item">
+                            <div class="card">
+
+                                <div class="container">
+
+                                    <div class="custom-control custom-radio">
+                                        @Html.RadioButtonFor(m => m.planRadio, "Monthly", new { id = "Monthly", @class = "custom-control-input" })
+                                        <label class="custom-control-label" for="Monthly"><h4><b>Monthly</b></h4></label>
+
+                                    </div>
+                                    <p id="planDetailsMonthly">@ViewBag.planDetailsMonthly </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="-p-2 item">
+                            <div class="card">
+
+                                <div class="container">
+                                
+                                    <div class="custom-control custom-radio">
+                                        @Html.RadioButtonFor(m => m.planRadio, "Annual", new { id = "Annual", @class = "custom-control-input" })
+                                        <label class="custom-control-label" for="Annual"><h4><b>Annual</b></h4></label>
+
+                                    </div>
+                                    <p id="planDetailsYearly"> @ViewBag.planDetailsYearly</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="-p-2 ">
+            <div class="card">
+
+                <div class="container">
+                    <h4><b>random</b></h4>
+                    <p>Some Information 2</p>
+                </div>
+            </div>
+        </div>*@
+                        @*</div>*@
+
+                    </div>
+
+
+                    <div class="login-title">
+
+                        <h2>Account information</h2>
+                    </div>
+
+                    <div class="row pb-10">
+   
+                        @*<div class="col-md-6 col-sm-6 col-xs-6 col-12">
+            <div class="input-group custom flex-column">
+                @Html.Label("Country you are in:")
+                @Html.TextBoxFor(model => model.Country, htmlAttributes: new { @class = "form-control", @id = "txtCountry" })
+            </div>
+        </div>*@
+                        <div class="col-md-6 col-sm-6 col-xs-6 col-12">
+                            <div class="input-group custom flex-column">
+                                @Html.Label("Country of Reisdence")
+                                @Html.DropDownListFor(model => model.currency, new SelectList(Model.Countries, "Value", "Text"), htmlAttributes: new { @class = "form-control", @id = "Country" })
+                                @Html.ValidationMessageFor(x => x.currency, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-10">
+                        <div class="col-md-6 col-sm-6 col-xs-6 col-12">
+                            <div class="input-group custom flex-column">
+                                @Html.Label("First name")
+                                @Html.TextBoxFor(model => model.FirstName, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 col-12">
+                            <div class="input-group custom flex-column">
+                                @Html.Label("Last name")
+                                @Html.TextBoxFor(model => model.LastName, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row pb-10">
+                        <div class="col-md-6 col-sm-6 col-xs-6 col-12">
+                            <div class="input-group custom flex-column">
+                                @Html.Label("Email")
+                                @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 col-12">
+                            <div class="input-group custom flex-column">
+                                @Html.Label("Password")
+                                @Html.PasswordFor(model => model.Password, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row pb-10">
+                        <div class="col-md-6 col-sm-6 col-xs-6 col-12">
+                            <div class="input-group custom flex-column">
+                                @Html.Label("Company")
+                                @Html.TextBoxFor(model => model.Company, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 col-12">
+                            <div class="input-group custom flex-column">
+                                @Html.Label("Job title")
+                                @Html.TextBoxFor(model => model.jobTitle, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.jobTitle, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-12">
+                            <div class="input-group custom flex-column ">
+                                @Html.Label("Select a plan")
+                            </div>
+                            <div class="custom d-flex">
+                                <div class="custom-control custom-radio">
+                                    @Html.RadioButtonFor(m => m.PLan, "Silver", new { id = "silver", @class = "custom-control-input" })
+                                    <label class="custom-control-label" for="silver">Silver</label>
+
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    @Html.RadioButtonFor(m => m.PLan, "Gold", new { id = "gold", @class = "custom-control-input" })
+                                    <label class="custom-control-label" for="gold">Gold</label>
+
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    @Html.RadioButtonFor(m => m.PLan, "Lead", new { id = "lead", @class = "custom-control-input" })
+                                    <label class="custom-control-label" for="lead">Lead</label>
+
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
+
+                <div class="row pb-10">
+                    <div class="col-12">
+                        <div class="input-group custom d-flex justify-content-end buttons-group">
+                            <button class="grad btn-primary grad btn btn-success small-width white" type="reset" id="reset">Reset</button>
+                            <button id="submit" class="grad btn-primary grad btn btn-success small-width" type="submit">Create Account</button>
+                            @*<button type="button" ; style="margin:5px;" onclick="window.open('https://subscriptions.zoho.com/subscribe/f2875ab05d3ace2d949fd6b20add1a3b1f563cd205dd5841ad482bf477cf719e/Silver')">Silver Plan</button> <button style="margin:5px;" onclick="window.open('https://subscriptions.zoho.com/subscribe/f2875ab05d3ace2d949fd6b20add1a3b1f563cd205dd5841ad482bf477cf719e/Gold')">Gold Plan</button> <button type="button" ; style="margin:5px;" onclick="window.open('https://subscriptions.zoho.com/subscribe/f2875ab05d3ace2d949fd6b20add1a3b1f563cd205dd5841ad482bf477cf719e/Lead')">Lead Plan</button>*@
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            @*<div class="row pb-10">
+                    <div class="col-12">
+                        @Html.ValidationSummary(false, "", new { @class = "alert alert-danger errorMessageSummary" })
+                    </div>
+                </div>*@
+            <div class="sidebar login-box border-radius-20">
+                <div class="item">
+                    <h5 id="titlePlan">Professional</h5>
+                    @*<p class="mb-0">A starter plan for those new to sales intelligence.</p>*@
+                </div><div class="item">
+                    <div id="rightPrice"class="price">$0.20 <small id="rate">/ Monthly</small></div>
+                    <div id="rateDiv"><strong id="contactNo" class="color-pink">500 Contacts</strong> per month</div>
+                    <div><small>Additional credits <strong id="additionalCredits" class="color-pink">$0.20</strong></small></div>
+                </div>
+                <div class="item pl-3 pr-3 no-border no-mar">
+                    <h6>Features included:</h6>
+                    <ul class="feature-list mt-3"><li>Cancel anytime</li><li>100% Guaranteed Valid</li><li>Unused Credits Rollover</li><li>1500+ Integrations</li><li>Multiple logins</li><li>24/7/365 telephone, chat & email support</li></ul>
+                </div><div class="item">
+                          
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="text">“My business has been searching for a way to expand our client base and has had several false starts with data providers stating 75% accuracy, 90% accuracy, 95% accuracy and all have failed to materialize. If it's not 100% then it's too easy to fudge. Datagenie, being 100% guaranteed, won us over.”</div>
+                                <div class="credit d-flex">
+                                    <span class="img mr-3"><img src="~/Testimonial Images/Stefan Meyer.jpg" /></span>
+                                    <span class="d-flex flex-column">
+                                        <span class="name">Stefan Meyer</span>
+                                        <span>Owner</span>
+                                        <span class="comp-name"> White Hat Metrics</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                           
+                            <div class="carousel-item">
+                                <div class="text">“Mostly I use Datagenie to save time. The interface is so easy to use. I used to spend hours searching and trying to verify leads and then cleaning up the bouncebacks. Now I focus on getting business.”</div>
+                                <div class="credit d-flex">
+                                    <span class="img mr-3"> <img src="~/Testimonial Images/Roger Dickinson.jpg" /></span>
+                                    <span class="d-flex flex-column">
+                                        <span class="name">Roger Dickinson</span>
+                                        <span class="comp-name">Business development exec</span>
+
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text">“It really can't be overstated how important it is offer quick & effective tech & customer support. It engenders confidence in the product and saves tonnes of our time. The other solutions we have tried only seem to have Tier 0 support (online help desk) & Tier 1 by email”</div>
+                                <div class="credit d-flex">
+                                    <span class="img mr-3"> <img src="~/Testimonial Images/Alex.jpg" /></span>
+                                    <span class="d-flex flex-column">
+                                        <span class="name">Alex Radford</span>
+                                    
+                                        <span class="comp-name">VP & owner</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (!string.IsNullOrEmpty(@ViewBag.planError))
+        {
+            <p id="planError" style="color:red">@ViewBag.planError</p>
+        }
+    </div>
+    if (!string.IsNullOrEmpty(@ViewBag.source))
+    {
+        <div id="fadeModal" class="modal-backdrop in"></div>
+        <div class="modal in" id="myModal" role="dialog" style="display:block !important">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center">
+                        <h3 class="text-center">Billing information</h3>
+                        <button type="button" class="close" onclick="document.getElementById('myModal').style.display = 'none'; document.getElementById('fadeModal').style.display = 'none'  " data-dismiss="modal"><i class="fa fa-close"></i>X</button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="@ViewBag.source" width="100%" height="100%" style="border:none;">
+                        </iframe>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    }
+    <!---
+
+                            <fieldset>
+
+                                <div class="grid-container">
+                                    <div class="grid-item">  </div>
+                                </div>
+                                <div class="grid-container">
+                                    @*<div class="grid-item">  @Html.Label("Countries")<select id="locality-dropdown" style="margin: 5px" name="locality"> Countries List</select></div>*@
+                                    <div class="grid-item">  </div>
+                                </div>
+                                <div class="grid-container">
+                                    <div class="grid-item">
+
+                                    </div>
+                                    <div class="grid-item">
+                                    </div>
+                                </div>
+                                <div class="grid-container">
+                                    <div class="grid-item">
+
+                                    </div>
+                                    <div class="grid-item">
+                                     </div>
+                                </div>
+
+                                <div class="grid-container">
+
+
+                                </div>
+
+                            </fieldset> @*<h1 id="data"></h1>*@
+
+    -->
+    }
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <p class="text-center mt-3">
+                    Copyright © 2022 Datagenie 
+                </p>
+            </div>
+        </div>
+    </div>
+    
+</footer>
